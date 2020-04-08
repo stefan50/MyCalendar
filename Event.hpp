@@ -23,7 +23,7 @@ public:
     const char* get_start_time() const;
     const char* get_end_time() const;
 
-    Event& operator=(Event&);
+    Event& operator=(Event& e);
 };
 
 #endif
