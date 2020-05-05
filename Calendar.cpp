@@ -5,7 +5,12 @@ String Calendar::get_current_date() const {
 }
 
 int Calendar::book(Event ev) {
-    return events.add_element(ev, Event::compare_events);
+    try {
+        return events.add_element(ev, Event::compare_events);
+    } catch(int a) {
+        std::cerr << "This event cannot be added!" << std::endl;
+        events.remove_element(ev, Event::compare_events);
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, Calendar& cal) {
@@ -14,6 +19,7 @@ std::ostream& operator<<(std::ostream& os, Calendar& cal) {
     }
     return os;
 }
+
 int Calendar::unbook(Event ev) {
     events.remove_element(ev, Event::compare_events);
 }

@@ -10,7 +10,6 @@ void CalendarParser::open(String file_name) {
     if(pos > 0 && !strcmp(&file_name[pos], ".txt")) {
         //BasicParser::open(file_name);
         std::ifstream calendar_file(file_name.to_cstr(), std::ios::in);
-        
     }
     else {
         //invalid
