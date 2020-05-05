@@ -51,7 +51,15 @@ void Calendar::change(Event ev, String option, String new_value) {
     }
 }
 
-/*void find(String key) const;
+void Calendar::find(String key) {
+    for(int i = 0; i < events.get_size(); i++) {
+        if(events[i].get_name().contains(key) || events[i].get_note().contains(key)) {
+            std::cout << events[i];
+        }
+    }
+}
+
+/*void busydays(String start_date, String end_date);
 int holiday(String date);
 void find_slot(String date, int hours) const;
 void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;

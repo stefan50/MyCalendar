@@ -24,7 +24,8 @@ public:
     void unbook(Event ev);
     void agenda(String date);
     void change(Event ev, String option, String new_value);
-    /*void find(String key) const;
+    void find(String key);
+    /*void busydays(String start_date, String end_date);
     int holiday(String date);
     void find_slot(String date, int hours) const;
     void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;

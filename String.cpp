@@ -89,3 +89,20 @@ int String::to_int() const  {
     //std::cout << "String = " << s << std::endl;
     return atoi(s.to_cstr());
 }
+
+bool String::contains(String key) {
+    bool result = false;
+    for(int i = 0; i < length(); i++) {
+        if(string[i] == key[i]) {
+            for(int j = i; j < key.length() + i; j++) {
+                if(string[j] != key[j - i]) break;
+                if(key.length() - 1 == j - i) {
+                    result = true;
+                    break;
+                } 
+            }
+
+        }
+    }
+    return result;
+}

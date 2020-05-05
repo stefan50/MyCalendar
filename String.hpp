@@ -32,6 +32,7 @@ public:
     const char* to_cstr() const;
     int length() const;
     int count_words() const;
+    bool contains(String key);
     friend std::istream& operator>>(std::istream& is, String& str);
     int to_int() const;
     ~String();
