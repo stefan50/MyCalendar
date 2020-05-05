@@ -1,12 +1,13 @@
 #ifndef CALENDAR_PARSER_HPP
 #define CALENDAR_PARSER_HPP
-#include "BasicParser.hpp"
+#include "String.hpp"
 #include "Calendar.hpp"
 #include <cstring>
 
-class CalendarParser: public BasicParser {
+class CalendarParser {
+    String file;
 public:
-    void open(const char* file_name) override;
+    void open(String file_name);
 };
 
 #endif 

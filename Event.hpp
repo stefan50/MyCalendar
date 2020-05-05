@@ -1,29 +1,32 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 #include <cstring>
+#include "String.hpp"
+#include <iostream>
 
 class Event {
 private:
     static const int DATE_BYTES = 11; //according to ISO 8601
-    char* start_time;
-    char* end_time;
+    String date;
+    String start_time;
+    String end_time;
+    String name;
+    String note;
 public:
-    Event(const char* start_time, const char* end_time) {
-        this->start_time = new char[DATE_BYTES];
-        this->end_time = new char[DATE_BYTES];
-        strcpy(this->start_time, start_time);
-        strcpy(this->end_time, end_time);
+    Event(String date, String start_time, String end_time, String name, String note) {
+        this->date = date;
+        this->start_time = start_time;
+        this->end_time = end_time;
+        this->name = name;
+        this->note = note;
     }
 
-    ~Event() {
-        delete[] start_time;
-        delete[] end_time;
-    }
-
-    const char* get_start_time() const;
-    const char* get_end_time() const;
-
-    Event& operator=(Event& e);
+    String get_start_time() const;
+    String get_end_time() const;
+    String get_name() const;
+    String get_note() const;
+    friend std::istream& operator>>(std::istream& is, Event& ev);
+    friend std::ostream& operator<<(std::ostream& os, Event& ev);
 };
 
 #endif
