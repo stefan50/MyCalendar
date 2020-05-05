@@ -67,3 +67,11 @@ std::istream& operator>>(std::istream& is, String& str) {
     is >> str.string;
     return is;
 }
+
+int String::count_words() const {
+    int result = 1;
+    for(int i = 0; i < length(); i++) {
+        if(string[i] == ' ') result++;
+    }
+    return result;
+}

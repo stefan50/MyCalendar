@@ -31,6 +31,7 @@ public:
     char& operator[](int pos);
     const char* to_cstr() const;
     int length() const;
+    int count_words() const;
     friend std::istream& operator>>(std::istream& is, String& str);
     ~String();
 };

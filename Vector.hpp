@@ -11,7 +11,7 @@ private:
     void erase() {
         delete[] elements;
     }
-    void copy(const Set& other) {
+    void copy(const Vector& other) {
         capacity = other.capacity;
         size = other.size;
         elements = new T[capacity];
