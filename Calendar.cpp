@@ -59,8 +59,10 @@ void Calendar::find(String key) {
     }
 }
 
-/*void busydays(String start_date, String end_date);
-int holiday(String date);
-void find_slot(String date, int hours) const;
+//void busydays(String start_date, String end_date);
+void Calendar::holiday(String date) {
+    book(Event(date, "00:00", "23:59", "Holiday", "You do not work on this day."));
+}
+/*void find_slot(String date, int hours) const;
 void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
 void merge(Vector<Calendar> calendars); */

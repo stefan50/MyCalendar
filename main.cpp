@@ -21,8 +21,10 @@ int main() {
     //cout << endl << cal << endl;
     Event event("19.05.2020", "12:20", "", "", "");
     cal.change(event, "date", "18.05.2020");
-    cal.find("Alo");
-    //cout << endl << cal << endl;
+    //cal.find("Alo");
+    cal.holiday("21.05.2020");
+    cal.book(Event("21.05.2020", "12:00", "12:20", "Meeting", "Important"));
+    cout << endl << cal << endl;
     //cout << cal << endl;
     /*for(int i = 0; i < evs.get_size(); i++) {
         cout << "Date: " << evs[i].get_date() << "Time: " << evs[i].get_start_time() << " " << evs[i].get_end_time() << endl;
