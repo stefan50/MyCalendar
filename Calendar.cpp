@@ -14,8 +14,10 @@ std::ostream& operator<<(std::ostream& os, Calendar& cal) {
     }
     return os;
 }
-/*int unbook(Event ev);
-void agenda(String date) const;
+int Calendar::unbook(Event ev) {
+    events.remove_element(ev, Event::compare_events);
+}
+/*void agenda(String date) const;
 void change(String date, String start_time, String option, String new_value);
 void find(String key) const;
 int holiday(String date);

@@ -17,6 +17,8 @@ int main() {
     cin >> ev;
     cal.book(ev);
     cout << endl << cal << endl;
+    cal.unbook(ev);
+    cout << endl << cal << endl;
     //cout << cal << endl;
     /*for(int i = 0; i < evs.get_size(); i++) {
         cout << "Date: " << evs[i].get_date() << "Time: " << evs[i].get_start_time() << " " << evs[i].get_end_time() << endl;

@@ -21,8 +21,8 @@ public:
     }
 
     int book(Event ev);
-    /*int unbook(Event ev);
-    void agenda(String date) const;
+    int unbook(Event ev);
+    /*void agenda(String date) const;
     void change(String date, String start_time, String option, String new_value);
     void find(String key) const;
     int holiday(String date);

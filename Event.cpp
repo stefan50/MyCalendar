@@ -57,3 +57,7 @@ bool Event::compare_events(Event ev1, Event ev2) {
     if(ev2.get_end_time().to_int() < ev1.get_start_time().to_int() && ev2.get_start_time().to_int() < ev1.get_start_time().to_int()) return false;
     return -2;
 }
+
+bool Event::operator!=(Event& other) {
+    return !(date == other.get_date() && start_time == other.get_start_time() && end_time == other.get_end_time());
+}
