@@ -31,6 +31,7 @@ public:
     String get_note() const;
     String get_date() const;
     static bool compare_events(Event ev1, Event ev2);
+    bool operator==(Event& other);
     bool operator!=(Event& other);
     friend std::istream& operator>>(std::istream& is, Event& ev);
     friend std::ostream& operator<<(std::ostream& os, const Event& ev);

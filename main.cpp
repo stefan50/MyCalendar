@@ -16,8 +16,11 @@ int main() {
     Calendar cal(evs);
     cin >> ev;
     cal.book(ev);
-    cout << endl << cal << endl;
-    cal.unbook(ev);
+    //cal.unbook(ev);
+    //cal.book(Event("18.05.2020", ev.get_start_time(), ev.get_end_time(), ev.get_name(), ev.get_note()));
+    //cout << endl << cal << endl;
+    Event event("19.05.2020", "12:20", "", "", "");
+    cal.change(event, "date", "18.05.2020");
     cout << endl << cal << endl;
     //cout << cal << endl;
     /*for(int i = 0; i < evs.get_size(); i++) {

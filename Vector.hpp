@@ -1,7 +1,6 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 #include <functional>
-// #include <algorithm>
 
 template <class T>
 class Vector {
@@ -52,10 +51,12 @@ public:
 
     void sort(std::function<bool(T, T)> comparator_function) {
         for(int i = 0; i < size - 1; i++) {
-            if(comparator_function(elements[i], elements[i + 1]) == false) {
-                T element = elements[i];
-                elements[i] = elements[i + 1];
-                elements[i + 1] = element;
+            for(int j = 0; j < size - i - 1; j++) {
+                if(comparator_function(elements[j], elements[j + 1]) == false) {
+                    T element = elements[j];
+                    elements[j] = elements[j + 1];
+                    elements[j + 1] = element;
+                }
             }
         }
     }
@@ -91,6 +92,13 @@ public:
         return size;
     }
 
+    T find_element(T element) {
+        for(int i = 0; i < size; i++) {
+            if(elements[i] == element) {
+                return elements[i];
+            }
+        }   
+    }
 };
 
 #endif

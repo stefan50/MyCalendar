@@ -20,11 +20,11 @@ public:
         this->events = events;
     }
 
-    int book(Event ev);
-    int unbook(Event ev);
-    /*void agenda(String date) const;
-    void change(String date, String start_time, String option, String new_value);
-    void find(String key) const;
+    void book(Event ev);
+    void unbook(Event ev);
+    void agenda(String date);
+    void change(Event ev, String option, String new_value);
+    /*void find(String key) const;
     int holiday(String date);
     void find_slot(String date, int hours) const;
     void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;

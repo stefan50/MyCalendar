@@ -64,3 +64,7 @@ bool Event::compare_events(Event ev1, Event ev2) {
 bool Event::operator!=(Event& other) {
     return !(date == other.get_date() && start_time == other.get_start_time() && end_time == other.get_end_time());
 }
+
+bool Event::operator==(Event& other) {
+    return date == other.get_date() && start_time == other.get_start_time();
+}

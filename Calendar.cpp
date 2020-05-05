@@ -4,9 +4,9 @@ String Calendar::get_current_date() const {
     return date;
 }
 
-int Calendar::book(Event ev) {
+void Calendar::book(Event ev) {
     try {
-        return events.add_element(ev, Event::compare_events);
+        events.add_element(ev, Event::compare_events);
     } catch(int a) {
         std::cerr << "This event cannot be added!" << std::endl;
         events.remove_element(ev, Event::compare_events);
@@ -20,12 +20,38 @@ std::ostream& operator<<(std::ostream& os, Calendar& cal) {
     return os;
 }
 
-int Calendar::unbook(Event ev) {
+void Calendar::unbook(Event ev) {
     events.remove_element(ev, Event::compare_events);
 }
-/*void agenda(String date) const;
-void change(String date, String start_time, String option, String new_value);
-void find(String key) const;
+
+void Calendar::agenda(String date) {
+    for(int i = 0; i < events.get_size(); i++) {
+        if(events[i].get_date() == date)
+            std::cout << events[i];
+    }
+}
+
+void Calendar::change(Event ev, String option, String new_value) {
+    Event curr_event = events.find_element(ev);
+    unbook(curr_event);
+    if(option == "date") {
+        book(Event(new_value, curr_event.get_start_time(), curr_event.get_end_time(), curr_event.get_name(), curr_event.get_note()));
+    }
+    else if(option == "starttime") {
+        book(Event(curr_event.get_date(), new_value, curr_event.get_end_time(), curr_event.get_name(), curr_event.get_note()));
+    }
+    else if(option == "enddate") {
+        book(Event(curr_event.get_date(), curr_event.get_start_time(), new_value, curr_event.get_name(), curr_event.get_note()));
+    }
+    else if(option == "name") {
+        book(Event(curr_event.get_date(), curr_event.get_start_time(), curr_event.get_end_time(), new_value, curr_event.get_note()));
+    }
+    else if(option == "note") {
+        book(Event(curr_event.get_date(), curr_event.get_start_time(), curr_event.get_end_time(), curr_event.get_name(), new_value));
+    }
+}
+
+/*void find(String key) const;
 int holiday(String date);
 void find_slot(String date, int hours) const;
 void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
