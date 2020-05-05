@@ -33,6 +33,7 @@ public:
     int length() const;
     int count_words() const;
     friend std::istream& operator>>(std::istream& is, String& str);
+    int to_int() const;
     ~String();
 };
 

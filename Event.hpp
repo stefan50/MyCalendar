@@ -14,7 +14,7 @@ private:
     String note;
 public:
     Event() {
-        
+
     }
 
     Event(String date, String start_time, String end_time, String name, String note) {
@@ -29,6 +29,8 @@ public:
     String get_end_time() const;
     String get_name() const;
     String get_note() const;
+    String get_date() const;
+    static bool compare_events(Event ev1, Event ev2);
     friend std::istream& operator>>(std::istream& is, Event& ev);
     friend std::ostream& operator<<(std::ostream& os, const Event& ev);
 };

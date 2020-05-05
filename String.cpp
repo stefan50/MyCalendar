@@ -75,3 +75,17 @@ int String::count_words() const {
     }
     return result;
 }
+
+int String::to_int() const  {
+    String s = "";
+    int k = 0;
+    for(int i = 0; i < length(); i++) {
+        if(string[i] >= '0' && string[i] <= '9') {
+            s[k] = string[i];
+            k++;
+        } 
+    }
+    s[k] = '\0';
+    //std::cout << "String = " << s << std::endl;
+    return atoi(s.to_cstr());
+}
