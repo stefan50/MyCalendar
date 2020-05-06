@@ -182,3 +182,10 @@ void Calendar::merge(Vector<Calendar> calendars) {
         }
     }
 }
+
+std::istream& operator>>(std::istream& is, Calendar& cal) {
+    for(int i = 0; i < cal.events_num(); i++) {
+        is >> cal[i];
+    }
+    return is;
+}

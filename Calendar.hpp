@@ -94,6 +94,7 @@ public:
         return events[pos];
     }
     friend std::ostream& operator<<(std::ostream& os, Calendar& cal);
+    friend std::istream& operator>>(std::istream& is, Calendar& cal);
 };
 
 #endif
