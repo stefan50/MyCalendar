@@ -59,7 +59,7 @@ void Calendar::find(String key) {
     }
 }
 
-void Calendar::busydays(String start_date, String end_date) {
+Vector<Calendar::DayBusiness> Calendar::busydays(String start_date, String end_date) {
     Vector<Event> busy_days;
     for(int i = 0; i < events.get_size(); i++) {
         if(events[i].get_date().to_int() >=  start_date.to_int() && events[i].get_date().to_int() <= end_date.to_int()) {
@@ -88,11 +88,38 @@ void Calendar::busydays(String start_date, String end_date) {
     for(int i = 0; i < days.get_size(); i++) {
         std::cout << days[i].date << " " << days[i].time << std::endl;
     }
+    return days;
 }
 
 void Calendar::holiday(String date) {
     book(Event(date, "00:00", "23:59", "Holiday", "You do not work on this day."));
 }
-/*void find_slot(String date, int hours) const;
-void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
+
+void Calendar::find_slot(String date, int hours) {
+    String curr_date = date;
+    while(true) {
+        int start_time = 800;
+        add_day(curr_date);
+        while(start_time < 1700 && start_time + hours * 100 < 1700) {
+            int end_time = start_time + hours * 100;
+            char start_time_buf[6];
+            char end_time_buf[6];
+            sprintf(start_time_buf, "%d%d:%d%d", start_time / 1000, (start_time / 100) % 10, (start_time / 10) % 10, start_time % 10);
+            sprintf(end_time_buf, "%d%d:%d%d", end_time / 1000, (end_time / 100) % 10, (end_time / 10) % 10, end_time % 10);
+            Event test_ev(curr_date, String(start_time_buf), String(end_time_buf), "test", "test");
+            try {
+                events.add_element(test_ev, Event::compare_events);
+            } catch(int num) {
+                start_time += 1;
+                events.remove_element(test_ev, Event::compare_events);
+                continue;
+            }
+            events.remove_element(test_ev, Event::compare_events);
+            std::cout << "Found slot: " << curr_date << " " << start_time_buf << " " << end_time_buf << std::endl;
+            return;
+        }
+    }
+}
+
+/*void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
 void merge(Vector<Calendar> calendars); */

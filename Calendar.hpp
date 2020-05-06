@@ -26,6 +26,44 @@ private:
         }
         return hrs * 100 + time_s;
     }
+    void add_day(String& date) {
+        int date_int = date.to_int();
+        int day = date_int % 100;
+        int month = (date_int / 100) % 100;
+        int year = date_int / 10000;
+        day++;
+        if(month == 2) {
+            if((year % 4 == 0 && year % 100 != 0) || (year % 100 == 0 && year % 400 == 0)) {
+                if(day == 30) {
+                    month++;
+                    day = 1;
+                }
+            }
+            if(day == 29) {
+                day = 1;
+                month++;
+            }
+        }
+        if((month < 8 && month % 2 != 0) || (month >= 8 && month % 2 == 0)) {
+            if(day == 32) {
+                day = 1;
+                month++;
+            }
+        }
+        else {
+            if(day == 31) {
+                day = 1;
+                month++;
+            }
+        }
+        if(month == 13) {
+            year++;
+            month = 1;
+        }
+        char date_c[11];
+        sprintf(date_c, "%d%d%d%d-%d%d-%d%d", year / 1000, (year / 100) % 10, (year / 10) % 10, year % 10, month / 10, month % 10, day / 10, day % 10);
+        date = String(date_c);
+    }
 public:
     Calendar(Vector<Event> events) {
         char current_date[DATE_BYTES];
@@ -41,10 +79,10 @@ public:
     void agenda(String date);
     void change(Event ev, String option, String new_value);
     void find(String key);
-    void busydays(String start_date, String end_date);
+    Vector<DayBusiness> busydays(String start_date, String end_date);
     void holiday(String date);
-    /*void find_slot(String date, int hours) const;
-    void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
+    void find_slot(String date, int hours);
+    /*void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
     void merge(Vector<Calendar> calendars);    */
 
     String get_current_date() const;

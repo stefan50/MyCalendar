@@ -24,7 +24,7 @@ int main() {
     //cal.find("Alo");
     cal.holiday("2020-05-17");
     cout << endl << cal << endl;
-    cal.busydays("2020-05-17", "2020-05-22");
+    cal.find_slot("2020-05-20", 4);
     //cal.book(Event("21.05.2020", "12:00", "12:20", "Meeting", "Important"));
     //cout << endl << cal << endl;
     //cout << cal << endl;
