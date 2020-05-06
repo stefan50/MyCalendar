@@ -65,6 +65,7 @@ private:
         date = String(date_c);
     }
 public:
+    Calendar() {}
     Calendar(Vector<Event> events) {
         char current_date[DATE_BYTES];
         std::time_t timer = std::time(0);
@@ -82,8 +83,8 @@ public:
     Vector<DayBusiness> busydays(String start_date, String end_date);
     void holiday(String date);
     void find_slot(String date, int hours);
-    /*void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
-    void merge(Vector<Calendar> calendars);    */
+    void find_slot_with(String date, int hours, Vector<Calendar> calendars);
+    /*void merge(Vector<Calendar> calendars);    */
 
     String get_current_date() const;
     int events_num() const {

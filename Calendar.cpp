@@ -5,12 +5,12 @@ String Calendar::get_current_date() const {
 }
 
 void Calendar::book(Event ev) {
-    try {
-        events.add_element(ev, Event::compare_events);
-    } catch(int a) {
-        std::cerr << "This event cannot be added!" << std::endl;
-        events.remove_element(ev, Event::compare_events);
-    }
+    //try {
+    events.add_element(ev, Event::compare_events);
+    //} catch(int a) {
+        //std::cerr << "This event cannot be added!" << std::endl;
+        //events.remove_element(ev, Event::compare_events);
+    //}
 }
 
 std::ostream& operator<<(std::ostream& os, Calendar& cal) {
@@ -121,5 +121,38 @@ void Calendar::find_slot(String date, int hours) {
     }
 }
 
-/*void find_slot_with(String date, int hours, Vector<Calendar> calendars) const;
-void merge(Vector<Calendar> calendars); */
+void Calendar::find_slot_with(String date, int hours, Vector<Calendar> calendars) {
+    String curr_date = date;
+    while(true) {
+        int start_time = 800;
+        add_day(curr_date);
+        while(start_time < 1700 && start_time + hours * 100 < 1700) {
+            int end_time = start_time + hours * 100;
+            char start_time_buf[6];
+            char end_time_buf[6];
+            sprintf(start_time_buf, "%d%d:%d%d", start_time / 1000, (start_time / 100) % 10, (start_time / 10) % 10, start_time % 10);
+            sprintf(end_time_buf, "%d%d:%d%d", end_time / 1000, (end_time / 100) % 10, (end_time / 10) % 10, end_time % 10);
+            Event test_ev(curr_date, String(start_time_buf), String(end_time_buf), "test", "test");
+            try {
+                events.add_element(test_ev, Event::compare_events);
+                for(int i = 0; i < calendars.get_size(); i++) {
+                    calendars[i].book(test_ev);
+                }
+            } catch(int num) {
+                start_time += 1;
+                events.remove_element(test_ev, Event::compare_events);
+                for(int i = 0; i < calendars.get_size(); i++) {
+                    calendars[i].unbook(test_ev);
+                }
+                continue;
+            }
+            events.remove_element(test_ev, Event::compare_events);
+            for(int i = 0; i < calendars.get_size(); i++) {
+                calendars[i].unbook(test_ev);
+            }
+            std::cout << "Found slot: " << curr_date << " " << start_time_buf << " " << end_time_buf << std::endl;
+            return;
+        }
+    }
+}
+/*void merge(Vector<Calendar> calendars); */

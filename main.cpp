@@ -14,6 +14,21 @@ int main() {
         evs.add_element(ev, Event::compare_events);
     }
     Calendar cal(evs);
+    Vector<Event> evs1;
+    for(int i = 0; i < 5; i++) {
+        cin >> ev;
+        evs1.add_element(ev, Event::compare_events);
+    }
+    Calendar cal1(evs1);
+    Vector<Event> evs2;
+    for(int i = 0; i < 5; i++) {
+        cin >> ev;
+        evs2.add_element(ev, Event::compare_events);
+    }
+    Calendar cal2(evs2);
+    Vector<Calendar> calendars;
+    calendars.add_element(cal1, [](Calendar c1, Calendar c2) -> bool{return c1.events_num() > c2.events_num();});
+    calendars.add_element(cal2, [](Calendar c1, Calendar c2) -> bool{return c1.events_num() > c2.events_num();});
     //cin >> ev;
     //cal.book(ev);
     //cal.unbook(ev);
@@ -24,7 +39,7 @@ int main() {
     //cal.find("Alo");
     cal.holiday("2020-05-17");
     cout << endl << cal << endl;
-    cal.find_slot("2020-05-20", 4);
+    cal.find_slot_with("2020-05-20", 4, calendars);
     //cal.book(Event("21.05.2020", "12:00", "12:20", "Meeting", "Important"));
     //cout << endl << cal << endl;
     //cout << cal << endl;
