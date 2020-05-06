@@ -77,9 +77,13 @@ public:
 
     T remove_element(T element, std::function<bool(T, T)> comparator_function) {
         Vector temp;
+        bool is_skip = false;
         for(int i = 0; i < size; i++) {
-            if(elements[i] != element) {
+            if(elements[i] != element || is_skip) {
                 temp.add_element(elements[i], comparator_function);
+            }
+            else {
+                is_skip = true;
             }
         }
         size--;

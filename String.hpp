@@ -3,6 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include <cstdlib>
+#include "Vector.hpp"
 
 class String {
 private:
@@ -35,6 +36,7 @@ public:
     bool contains(String key);
     friend std::istream& operator>>(std::istream& is, String& str);
     int to_int() const;
+    Vector<String> split();
     ~String();
 };
 

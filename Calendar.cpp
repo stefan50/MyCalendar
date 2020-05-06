@@ -92,14 +92,20 @@ Vector<Calendar::DayBusiness> Calendar::busydays(String start_date, String end_d
 }
 
 void Calendar::holiday(String date) {
-    book(Event(date, "00:00", "23:59", "Holiday", "You do not work on this day."));
+    Event ev(date, "00:00", "23:59", "Holiday", "You do not work on this day.");
+    try {
+        book(ev);
+    } catch(EventException ex) {
+        unbook(ev);
+        std::cout << "There is a collision between events." << std::endl;
+    }
 }
 
 void Calendar::find_slot(String date, int hours) {
     String curr_date = date;
-    while(true) {
+    for(int i = 0;; i++) {
         int start_time = 800;
-        add_day(curr_date);
+        if(i != 0) add_day(curr_date);
         while(start_time < 1700 && start_time + hours * 100 < 1700) {
             int end_time = start_time + hours * 100;
             char start_time_buf[6];
@@ -184,8 +190,11 @@ void Calendar::merge(Vector<Calendar> calendars) {
 }
 
 std::istream& operator>>(std::istream& is, Calendar& cal) {
-    for(int i = 0; i < cal.events_num(); i++) {
-        is >> cal[i];
+    Vector<Event> evs;
+    Event ev;
+    while(is >> ev) {
+        evs.add_element(ev, Event::compare_events);
     }
+    cal = Calendar(evs);
     return is;
 }

@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     /*CalendarParser cp;
     cp.open("test.txt");*/
-    Event ev;
+    /*Event ev;
     Vector<Event> evs;
     for(int i = 0; i < 5; i++) {
         cin >> ev;
@@ -49,5 +49,7 @@ int main() {
     /*for(int i = 0; i < 4; i++) {
         cout << evs[i] << endl;
     }*/
+    CalendarParser cp;
+    cp.run();
     return 0;
 }
