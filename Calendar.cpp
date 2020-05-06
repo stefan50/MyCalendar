@@ -109,7 +109,7 @@ void Calendar::find_slot(String date, int hours) {
             Event test_ev(curr_date, String(start_time_buf), String(end_time_buf), "test", "test");
             try {
                 events.add_element(test_ev, Event::compare_events);
-            } catch(int num) {
+            } catch(EventException& ex) {
                 start_time += 1;
                 events.remove_element(test_ev, Event::compare_events);
                 continue;
@@ -138,7 +138,7 @@ void Calendar::find_slot_with(String date, int hours, Vector<Calendar> calendars
                 for(int i = 0; i < calendars.get_size(); i++) {
                     calendars[i].book(test_ev);
                 }
-            } catch(int num) {
+            } catch(EventException& ex) {
                 start_time += 1;
                 events.remove_element(test_ev, Event::compare_events);
                 for(int i = 0; i < calendars.get_size(); i++) {
@@ -155,4 +155,30 @@ void Calendar::find_slot_with(String date, int hours, Vector<Calendar> calendars
         }
     }
 }
-/*void merge(Vector<Calendar> calendars); */
+void Calendar::merge(Vector<Calendar> calendars) {
+    for(int i = 0; i < calendars.get_size(); i++) {
+        for(int j = 0; j < calendars[i].events_num(); j++) {
+            try {
+                events.add_element(calendars[i][j], Event::compare_events);
+            } catch(EventException& ex) {
+                //events.remove_element(calendars[i][j], Event::compare_events);
+                std::cout << "There is a problem between event " << events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", ""))
+                << " and event " << calendars[i][j] << std::endl;
+                std::cout << "Which event would you like to change: ";
+                int option;
+                std::cin >> option;
+                std::cout << "Enter new information for event:" << std::endl;
+                Event ev;
+                std::cin >> ev;
+                //events.remove_element(events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", "")), Event::compare_events);
+                if(option == 1) {
+                    events.remove_element(events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", "")), Event::compare_events);    
+                }
+                else if(option == 2) {
+                    events.remove_element(calendars[i][j], Event::compare_events);
+                }
+                events.add_element(ev, Event::compare_events);
+            }
+        }
+    }
+}

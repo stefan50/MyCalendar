@@ -3,6 +3,7 @@
 #include <cstring>
 #include "String.hpp"
 #include <iostream>
+#include "EventException.hpp"
 
 class Event {
 private:

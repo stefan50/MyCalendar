@@ -84,7 +84,7 @@ public:
     void holiday(String date);
     void find_slot(String date, int hours);
     void find_slot_with(String date, int hours, Vector<Calendar> calendars);
-    /*void merge(Vector<Calendar> calendars);    */
+    void merge(Vector<Calendar> calendars);    
 
     String get_current_date() const;
     int events_num() const {

@@ -38,8 +38,8 @@ int main() {
     cal.change(event, "date", "2020-05-18");
     //cal.find("Alo");
     cal.holiday("2020-05-17");
+    cal.merge(calendars);
     cout << endl << cal << endl;
-    cal.find_slot_with("2020-05-20", 4, calendars);
     //cal.book(Event("21.05.2020", "12:00", "12:20", "Meeting", "Important"));
     //cout << endl << cal << endl;
     //cout << cal << endl;
