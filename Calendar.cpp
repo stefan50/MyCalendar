@@ -5,12 +5,7 @@ String Calendar::get_current_date() const {
 }
 
 void Calendar::book(Event ev) {
-    //try {
     events.add_element(ev, Event::compare_events);
-    //} catch(int a) {
-        //std::cerr << "This event cannot be added!" << std::endl;
-        //events.remove_element(ev, Event::compare_events);
-    //}
 }
 
 std::ostream& operator<<(std::ostream& os, Calendar& cal) {
@@ -21,7 +16,7 @@ std::ostream& operator<<(std::ostream& os, Calendar& cal) {
 }
 
 void Calendar::unbook(Event ev) {
-    events.remove_element(ev, Event::compare_events);
+    events.remove_element(ev);
 }
 
 void Calendar::agenda(String date) {
@@ -117,10 +112,10 @@ void Calendar::find_slot(String date, int hours) {
                 events.add_element(test_ev, Event::compare_events);
             } catch(EventException& ex) {
                 start_time += 1;
-                events.remove_element(test_ev, Event::compare_events);
+                events.remove_element(test_ev);
                 continue;
             }
-            events.remove_element(test_ev, Event::compare_events);
+            events.remove_element(test_ev);
             std::cout << "Found slot: " << curr_date << " " << start_time_buf << " " << end_time_buf << std::endl;
             return;
         }
@@ -146,13 +141,13 @@ void Calendar::find_slot_with(String date, int hours, Vector<Calendar> calendars
                 }
             } catch(EventException& ex) {
                 start_time += 1;
-                events.remove_element(test_ev, Event::compare_events);
+                events.remove_element(test_ev);
                 for(int i = 0; i < calendars.get_size(); i++) {
                     calendars[i].unbook(test_ev);
                 }
                 continue;
             }
-            events.remove_element(test_ev, Event::compare_events);
+            events.remove_element(test_ev);
             for(int i = 0; i < calendars.get_size(); i++) {
                 calendars[i].unbook(test_ev);
             }
@@ -167,7 +162,6 @@ void Calendar::merge(Vector<Calendar> calendars) {
             try {
                 events.add_element(calendars[i][j], Event::compare_events);
             } catch(EventException& ex) {
-                //events.remove_element(calendars[i][j], Event::compare_events);
                 std::cout << "There is a problem between event " << events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", ""))
                 << " and event " << calendars[i][j] << std::endl;
                 std::cout << "Which event would you like to change: ";
@@ -176,12 +170,11 @@ void Calendar::merge(Vector<Calendar> calendars) {
                 std::cout << "Enter new information for event:" << std::endl;
                 Event ev;
                 std::cin >> ev;
-                //events.remove_element(events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", "")), Event::compare_events);
                 if(option == 1) {
-                    events.remove_element(events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", "")), Event::compare_events);    
+                    events.remove_element(events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", "")));    
                 }
                 else if(option == 2) {
-                    events.remove_element(calendars[i][j], Event::compare_events);
+                    events.remove_element(calendars[i][j]);
                 }
                 events.add_element(ev, Event::compare_events);
             }

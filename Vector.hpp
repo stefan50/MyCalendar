@@ -75,12 +75,12 @@ public:
         return 0;
     }
 
-    T remove_element(T element, std::function<bool(T, T)> comparator_function) {
+    void remove_element(T element) {
         Vector temp;
         bool is_skip = false;
         for(int i = 0; i < size; i++) {
             if(elements[i] != element || is_skip) {
-                temp.add_element(elements[i], comparator_function);
+                temp.add_element(elements[i], [](T a, T b) -> bool{return true;});
             }
             else {
                 is_skip = true;
@@ -89,7 +89,6 @@ public:
         size--;
         erase();
         copy(temp);
-        return element;
     }
 
     int get_size() const {
