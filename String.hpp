@@ -36,7 +36,7 @@ public:
     bool contains(String key);
     friend std::istream& operator>>(std::istream& is, String& str);
     int to_int() const;
-    Vector<String> split();
+    Vector<String> split(char el);
     ~String();
 };
 

@@ -56,7 +56,7 @@ void CalendarParser::run() {
         std::cout << "> ";
         char buffer[256];
         std::cin.getline(buffer, 256);
-        Vector<String> command = String(buffer).split();
+        Vector<String> command = String(buffer).split(' ');
         if(command[0] == "open") {
             open(command[1]);
         }
@@ -77,12 +77,21 @@ void CalendarParser::run() {
             break;
         }
         else if(command[0] == "book") {
-            Event ev(command[1], command[2], command[3], command[5], command[7]);
+            Event ev;
             try {
+                ev = Event(command[1], command[2], command[3], command[5], command[7]);
                 calendar.book(ev);
             } catch(EventException ex) {
                 calendar.unbook(ev);
-                std::cout << "There is a collision between events." << std::endl;
+                if(ex.get_date() == "") {
+                    std::cout << ex.get_start_time() << " is not in the desired format!" << std::endl;
+                }
+                else if(ex.get_start_time() == "") {
+                    std::cout << ex.get_date() << " is not in the desired format!" << std::endl;
+                }
+                else {
+                    std::cout << "There is a collision between events." << std::endl;
+                }
             }
         }
         else if(command[0] == "unbook") {

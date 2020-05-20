@@ -107,15 +107,15 @@ bool String::contains(String key) {
     return result;
 }
 
-Vector<String> String::split() {
+Vector<String> String::split(char el) {
     Vector<String> result;
     char str[20];
-    if(count_words() == 1) {
+    /*if(count_words() == 1) {
         result.add_element(*this, [](String a, String b) -> bool{return true;});
         return result;
-    }
+    }*/
     for(int i = 0, k = 0; i < length(); i++, k++) {
-        if(string[i] == ' ' || string[i + 1] == '\0') {
+        if(string[i] == el || string[i + 1] == '\0') {
             if(string[i + 1] == '\0') {
                 str[k] = string[i];
                 str[k + 1] = '\0';

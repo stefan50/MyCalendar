@@ -1,7 +1,6 @@
 #ifndef EVENT_EXCEPTION_HPP
 #define EVENT_EXCEPTION_HPP
 #include <exception>
-#include "Event.hpp"
 
 class EventException: public std::exception {
 private:
