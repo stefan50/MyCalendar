@@ -77,7 +77,7 @@ void CalendarParser::run() {
             break;
         }
         else if(command[0] == "book") {
-            Event ev(command[1], command[2], command[3], command[4], command[5]);
+            Event ev(command[1], command[2], command[3], command[5], command[7]);
             try {
                 calendar.book(ev);
             } catch(EventException ex) {
