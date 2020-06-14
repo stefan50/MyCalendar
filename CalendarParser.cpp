@@ -101,7 +101,7 @@ void CalendarParser::run() {
             calendar.agenda(command[1]);
         }
         else if(command[0] == "change") {
-            Event ev(command[1], command[2], "", "", "");
+            Event ev(command[1], command[2], "23:59", "", "");
             calendar.change(ev, command[3], command[4]);
         }
         else if(command[0] == "find") {

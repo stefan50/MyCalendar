@@ -162,7 +162,7 @@ void Calendar::merge(Vector<Calendar> calendars) {
             try {
                 events.add_element(calendars[i][j], Event::compare_events);
             } catch(EventException& ex) {
-                std::cout << "There is a problem between event " << events.find_element(Event(ex.get_date(), ex.get_start_time(), "", "", ""))
+                std::cout << "There is a problem between event " << events.find_element(Event(ex.get_date(), ex.get_start_time(), "23:59", "", ""))
                 << " and event " << calendars[i][j] << std::endl;
                 std::cout << "Which event would you like to change: ";
                 int option;

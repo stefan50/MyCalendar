@@ -95,7 +95,7 @@ public:
         return size;
     }
 
-    T find_element(T element) {
+    T& find_element(T element) {
         for(int i = 0; i < size; i++) {
             if(elements[i] == element) {
                 return elements[i];

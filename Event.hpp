@@ -81,6 +81,7 @@ public:
         check_date(date);
         check_time(start_time);
         check_time(end_time);
+        //std::cout << "Start: " << start_time.to_int() << " and end: " << end_time.to_int() << std::endl;
         if(start_time.to_int() > end_time.to_int()) {
             throw EventException(date, start_time);
         }
